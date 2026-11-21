@@ -2,6 +2,12 @@
 
 Deep transfer learning and explainable AI (Grad-CAM) for classifying microbial colonisation on microbial fuel cell (MFC) electrodes from scanning electron microscopy (SEM) images.
 
+<p align="center">
+  <img src="figures/4-45(16).jpg" width="250" alt="SEM patch">
+  <img src="figures/gradcam__EfficientNetB0__CV(V)_select_top3__class_4__4-45(16)__overlay.png" width="250" alt="Grad-CAM overlay">
+</p>
+<p align="center"><em>Example SEM patch (left) and its Grad-CAM explanation (right).</em></p>
+
 ## Overview
 
 - Five-class colonisation scheme for SEM image patches
