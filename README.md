@@ -19,17 +19,3 @@ pip install -r requirements.txt
 # Example: train EfficientNetB0 with 4-fold cross-validation
 python -m src.train_cv --model EfficientNetB0 --data_dir data
 ```
-
-
-
-## Citation
-
-If you use this code, please cite it using the **"Cite this repository"** button on the right. The citation of the accompanying paper will be added after publication.
-
-## License
-
-This project is released under the [MIT License](LICENSE).
-
-## Contact
-
-**Nasim Amani**, [GitHub](https://github.com/Nasim-Amani)
