@@ -2,8 +2,6 @@
 
 Deep transfer learning and explainable AI (Grad-CAM) for classifying microbial colonisation on microbial fuel cell (MFC) electrodes from scanning electron microscopy (SEM) images.
 
-> 📄 This repository accompanies a manuscript currently under review. Full details, results and the citation will be added after publication.
-
 ## Overview
 
 - Five-class colonisation scheme for SEM image patches
