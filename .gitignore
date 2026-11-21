@@ -8,3 +8,6 @@ outputs/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# Selected SEM images for Grad-CAM (not shared)
+gradcam_images/

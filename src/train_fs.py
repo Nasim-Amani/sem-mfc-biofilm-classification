@@ -77,6 +77,7 @@ def main(model_name, data_dir, out_dir):
     # --- Save ---
     model.save_weights(out_dir / "model.weights.h5")
     np.save(out_dir / "test_probs.npy", test_probs)
+    np.save(out_dir / "y_test.npy", y_test)  # true labels, needed by plot_model.py
     save_json(history.history, out_dir / "history.json")
     save_json({"test": test_metrics, "val": val_metrics}, out_dir / "metrics.json")
     print(f"\n✅ Results saved to {out_dir}")

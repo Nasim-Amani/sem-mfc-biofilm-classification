@@ -23,16 +23,16 @@ def evaluate(y_true, y_probs, class_names, title="Test set"):
 
     metrics = {
         "accuracy": accuracy_score(y_true, y_pred),
-        "macro_f1": f1_score(y_true, y_pred, average="macro"),
-        "weighted_f1": f1_score(y_true, y_pred, average="weighted"),
-        "per_class_f1": f1_score(y_true, y_pred, average=None).tolist(),
+        "macro_f1": f1_score(y_true, y_pred, average="macro", zero_division=0),
+        "weighted_f1": f1_score(y_true, y_pred, average="weighted", zero_division=0),
+        "per_class_f1": f1_score(y_true, y_pred, average=None, labels=range(len(class_names)), zero_division=0).tolist(),
         "macro_auc": roc_auc_score(y_true_onehot, y_probs, average="macro", multi_class="ovr"),
         "weighted_auc": roc_auc_score(y_true_onehot, y_probs, average="weighted", multi_class="ovr"),
         "confusion_matrix": confusion_matrix(y_true, y_pred).tolist(),
     }
 
     print(f"\n===== {title} =====")
-    print(classification_report(y_true, y_pred, target_names=class_names))
+    print(classification_report(y_true, y_pred, labels=range(len(class_names)), target_names=class_names, zero_division=0))
     print("Confusion matrix:\n", np.array(metrics["confusion_matrix"]))
     print(f"Accuracy: {metrics['accuracy']:.4f} | Macro F1: {metrics['macro_f1']:.4f} "
           f"| Macro AUC: {metrics['macro_auc']:.4f}")

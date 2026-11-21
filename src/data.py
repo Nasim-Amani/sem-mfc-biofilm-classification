@@ -16,7 +16,6 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 from src.config import AUGMENTATION, IMG_EXTENSIONS, SEED, TEST_SIZE
 
@@ -71,6 +70,8 @@ def make_generators(preprocess_fn):
     Each pretrained model expects its inputs scaled in a specific way,
     so `preprocess_fn` comes from models.py (e.g. ResNet vs EfficientNet).
     """
+    from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
     train_datagen = ImageDataGenerator(preprocessing_function=preprocess_fn, **AUGMENTATION)
     eval_datagen = ImageDataGenerator(preprocessing_function=preprocess_fn)
     return train_datagen, eval_datagen

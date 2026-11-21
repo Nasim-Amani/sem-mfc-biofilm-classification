@@ -90,6 +90,7 @@ def main(model_name, data_dir, out_dir):
 
     # --- Save everything needed for the figures/tables ---
     np.save(out_dir / "test_probs.npy", test_probs)
+    np.save(out_dir / "y_test.npy", y_test)  # true labels, needed by plot_model.py
     save_json(histories, out_dir / "histories.json")
     save_json({"test": test_metrics, "folds_val": fold_val_metrics}, out_dir / "metrics.json")
     print(f"\n✅ Results saved to {out_dir}")

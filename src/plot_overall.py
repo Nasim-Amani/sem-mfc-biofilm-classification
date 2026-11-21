@@ -37,8 +37,7 @@ def collect_results(out_dir, strategy):
 
 
 def plot(cv, fs, save_path):
-    vmin = min(cv.values.min(), fs.values.min())
-    vmax = max(cv.values.max(), fs.values.max())
+    vmin, vmax = 0.15, 0.65   # same colour range as Fig. 3 in the paper
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 8), sharey=True,
                              gridspec_kw={"wspace": 0.08})

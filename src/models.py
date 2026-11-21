@@ -45,20 +45,42 @@ SHORT_NAMES = {
 }
 
 
+def build_small_cnn(num_classes):
+    """Baseline (Section 4.3): lightweight CNN trained from scratch, no ImageNet.
+
+    3 conv blocks (Conv -> BatchNorm -> MaxPool) + GAP + small dense head.
+    About 0.1 M parameters, vs. about 4 M for EfficientNetB0.
+    """
+    model = tf.keras.Sequential([layers.Input(shape=(*IMG_SIZE, 3))], name="SmallCNN")
+    for filters in (32, 64, 128):
+        model.add(layers.Conv2D(filters, 3, activation="relu", padding="same"))
+        model.add(layers.BatchNormalization())
+        model.add(layers.MaxPooling2D())
+    model.add(layers.GlobalAveragePooling2D())
+    model.add(layers.Dense(64, activation="relu"))
+    model.add(layers.Dropout(DROPOUT))
+    model.add(layers.Dense(num_classes, activation="softmax"))
+    return model
+
+
 def get_preprocess_fn(name):
     """Return the input preprocessing function that matches the backbone."""
+    if name == "SmallCNN":
+        return lambda x: x   # trained from scratch on raw pixels
     return MODEL_REGISTRY[name][1]
 
 
 def build_model(name, num_classes):
-    """Build a transfer-learning classifier.
+    """Build a transfer-learning classifier (or the SmallCNN baseline).
 
     Args:
-        name:        a key of MODEL_REGISTRY, e.g. "EfficientNetB0"
+        name:        a key of MODEL_REGISTRY, e.g. "EfficientNetB0", or "SmallCNN"
         num_classes: number of colonisation classes (5)
     """
+    if name == "SmallCNN":
+        return build_small_cnn(num_classes)
     if name not in MODEL_REGISTRY:
-        raise ValueError(f"Unknown model '{name}'. Choose from: {list(MODEL_REGISTRY)}")
+        raise ValueError(f"Unknown model '{name}'. Choose from: {list(MODEL_REGISTRY)} or SmallCNN")
 
     backbone_fn, _ = MODEL_REGISTRY[name]
     input_shape = (*IMG_SIZE, 3)
