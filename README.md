@@ -20,9 +20,7 @@ pip install -r requirements.txt
 python -m src.train_cv --model EfficientNetB0 --data_dir data
 ```
 
-## Data availability
 
-The SEM dataset is not included in this repository. It is available from the authors on reasonable request.
 
 ## Citation
 
